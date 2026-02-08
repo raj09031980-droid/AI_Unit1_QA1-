@@ -1,0 +1,47 @@
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
+import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+
+public class EventHandlingDemo extends Application {
+
+    @Override
+    public void start(Stage stage) {
+
+        Label info = new Label("Interact with the controls");
+
+        Button button = new Button("Click Me");
+
+        TextField field = new TextField();
+        field.setPromptText("Type something");
+
+        // Button click event
+        button.setOnAction(e ->
+                info.setText("Button clicked")
+        );
+
+        // Key press event
+        field.setOnKeyPressed((KeyEvent e) -> {
+            info.setText("Key Pressed: " + e.getCode());
+        });
+
+        // Mouse hover event
+        button.setOnMouseEntered((MouseEvent e) -> {
+            info.setText("Mouse over button");
+        });
+
+        VBox layout = new VBox(10, field, button, info);
+        Scene scene = new Scene(layout, 350, 200);
+
+        stage.setTitle("Event Handling Demo");
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    public static void main(String[] args) {
+        launch(args);
+    }
+}
